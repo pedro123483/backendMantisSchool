@@ -7,5 +7,6 @@ route.post("/", teacherController.create);
 route.get("/", teacherController.read);
 route.put("/:id", teacherController.update);
 route.delete("/:id", teacherController.remove);
+route.get("/:id", teacherController.readById);
 
 export default route;

@@ -63,9 +63,26 @@ const remove = async (request, response) => {
     }
 };
 
+const readById = async (request, response) => {
+    try {
+        const { id } = request.params;
+
+        const subject = await classService.readById(id);
+
+        if(!subject) {
+            return response.status(404).send({ message: "Class not found." });
+        }
+
+        response.status(200).send({ subject });
+    } catch (error) {
+        return response.status(500).send({ message: error.message });
+    }
+};
+
 export default {
     create,
     read,
     update,
     remove,
+    readById,
 };

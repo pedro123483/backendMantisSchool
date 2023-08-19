@@ -63,9 +63,26 @@ const remove = async (request, response) => {
     }
 };
 
+const readById = async (request, response) => {
+    try {
+        const { id } = request.params;
+
+        const teacher = await teacherService.readById(id);
+
+        if(!teacher) {
+            return response.status(404).send({ message: "Teacher not found." });
+        }
+
+        response.status(200).send({ teacher });
+    } catch (error) {
+        return response.status(500).send({ message: error.message });
+    }
+};
+
 export default {
     create,
     read,
     update,
     remove,
+    readById,
 };
